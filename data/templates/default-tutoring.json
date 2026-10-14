@@ -23,6 +23,7 @@
       "output_type": "questions",
       "dependencies": ["teach"],
       "student_facing": true,
+      "answers_in_student_copy": true,
       "description": "Write 3 worked examples that increase in difficulty. Each must have a full step-by-step working that a teacher can model on the board. Every numeric answer must include a check expression."
     },
     {

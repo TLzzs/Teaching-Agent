@@ -36,6 +36,7 @@ class SectionDefinition(BaseModel):
     output_type: OutputType = OutputType.MARKDOWN
     dependencies: list[str] = Field(default_factory=list)
     student_facing: bool = False
+    answers_in_student_copy: bool = False
 
 
 class WorkflowTemplate(BaseModel):
