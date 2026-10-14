@@ -6,3 +6,5 @@ __pycache__/
 .ruff_cache/
 *.docx
 !tests/fixtures/*.docx
+node_modules/
+.next/
