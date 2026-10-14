@@ -100,6 +100,7 @@ class NumberLine(BaseModel):
     step: float
     marks: list[float] = Field(default_factory=list)
     labels: list[str] = Field(default_factory=list)
+    label_style: Literal["auto", "fraction", "decimal"] = "auto"
 
 
 class BarChart(BaseModel):

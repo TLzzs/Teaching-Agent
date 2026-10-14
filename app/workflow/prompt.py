@@ -46,7 +46,8 @@ Rules:
   "expected" is the final answer as a plain number or fraction, e.g. "28", "3/4" or "0.25".
   Use null for "check" only when the answer is not a single number.
 - "diagram" is optional (null if not needed) and must be one of:
-  {"kind": "number_line", "start": 0, "end": 2, "step": 0.25, "marks": [0.75], "labels": ["A"]}
+  {"kind": "number_line", "start": 0, "end": 2, "step": 0.25, "marks": [0.75], "labels": ["A"],
+   "label_style": "fraction"}  (label_style: "fraction", "decimal" or "auto")
   {"kind": "bar_chart", "title": "...", "categories": ["..."], "values": [3, 5], "y_label": "..."}
   {"kind": "rectangle", "width": 7, "height": 4, "unit": "cm"}
 """

@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block header_right %}
+<span class="text-xs px-2 py-1 rounded-full {{ 'bg-amber-100 text-amber-800' if provider == 'mock' else 'bg-emerald-100 text-emerald-800' }}">
+  模型：{{ provider }}{% if provider == 'mock' %}（离线演示数据）{% endif %}
+</span>
+{% endblock %}
+
+{% block content %}
+<div class="grid lg:grid-cols-[340px_1fr] gap-8 items-start">
+  <form hx-post="/generate" hx-target="#result" hx-indicator="#spinner" hx-disabled-elt="find button"
+        class="bg-white rounded-xl border border-slate-200 p-5 space-y-4 lg:sticky lg:top-6">
+    <h2 class="font-semibold text-lg">生成一节课</h2>
+
+    <label class="block">
+      <span class="text-sm text-slate-600">机构</span>
+      <select name="org_id" class="mt-1 w-full rounded-lg border-slate-300 border px-3 py-2">
+        {% for org in orgs %}<option value="{{ org.id }}">{{ org.name }}</option>{% endfor %}
+      </select>
+    </label>
+
+    <label class="block">
+      <span class="text-sm text-slate-600">知识点（Victorian Curriculum 2.0 Mathematics）</span>
+      <select name="curriculum_code" required class="mt-1 w-full rounded-lg border-slate-300 border px-3 py-2">
+        {% for level in levels %}
+        <optgroup label="Level {{ level }}">
+          {% for item in curriculum.items if item.level == level %}
+          <option value="{{ item.code }}" {% if item.code == 'VC2M5N05' %}selected{% endif %}>{{ item.code }} · {{ item.topic }}</option>
+          {% endfor %}
+        </optgroup>
+        {% endfor %}
+      </select>
+    </label>
+
+    <div class="grid grid-cols-2 gap-3">
+      <label class="block">
+        <span class="text-sm text-slate-600">学生水平</span>
+        <select name="student_level" class="mt-1 w-full rounded-lg border-slate-300 border px-3 py-2">
+          <option value="foundation">基础</option>
+          <option value="core" selected>中等</option>
+          <option value="extension">拔高</option>
+        </select>
+      </label>
+      <label class="block">
+        <span class="text-sm text-slate-600">课时（分钟）</span>
+        <input type="number" name="duration_minutes" value="60" min="30" max="180" step="15"
+               class="mt-1 w-full rounded-lg border-slate-300 border px-3 py-2">
+      </label>
+    </div>
+
+    <label class="block">
+      <span class="text-sm text-slate-600">给 AI 的补充说明（可选）</span>
+      <textarea name="extra_context" rows="3" maxlength="4000" placeholder="例如：学生对带分数比较薄弱，多用披萨和尺子的例子"
+                class="mt-1 w-full rounded-lg border-slate-300 border px-3 py-2 text-sm"></textarea>
+    </label>
+
+    <button type="submit" class="w-full rounded-lg bg-teal-700 hover:bg-teal-800 text-white font-medium py-2.5 disabled:opacity-60">
+      生成教案和练习
+    </button>
+    <div id="spinner" class="htmx-indicator items-center gap-2 text-sm text-slate-500">
+      <svg class="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" opacity=".25"/><path d="M22 12a10 10 0 0 0-10-10" stroke="currentColor" stroke-width="3"/></svg>
+      正在分段生成并校验答案…
+    </div>
+    <p class="text-xs text-slate-400">{{ curriculum.notice }}</p>
+  </form>
+
+  <section id="result">
+    <div class="rounded-xl border-2 border-dashed border-slate-200 p-12 text-center text-slate-400">
+      选好知识点后点击“生成”，这里会显示整节课的教案、分层练习、小测、作业和家长反馈。
+    </div>
+  </section>
+</div>
+{% endblock %}

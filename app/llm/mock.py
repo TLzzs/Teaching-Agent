@@ -32,6 +32,11 @@ def frac(value: Fraction) -> str:
     return f"{value.numerator}/{value.denominator}"
 
 
+def simplified(numerator: int, denominator: int) -> str:
+    text = frac(Fraction(numerator, denominator))
+    return "" if text == f"{numerator}/{denominator}" else f" = {text}"
+
+
 def q(prompt: str, answer: str, working: str, expression: str, expected: str, **kw) -> Question:
     return Question(
         prompt=prompt,
@@ -138,7 +143,14 @@ def gen_equivalent_fractions(rng: random.Random, tier: StudentLevel) -> Question
             f"Multiply top and bottom by {n}: 1/2 = {n}/{2 * n}",
             f"1*{2 * n}/2",
             str(n),
-            diagram=NumberLine(start=0, end=1, step=1 / (2 * n), marks=[0.5], labels=["1/2"]),
+            diagram=NumberLine(
+                start=0,
+                end=1,
+                step=1 / (2 * n),
+                marks=[0.5],
+                labels=["1/2"],
+                label_style="fraction",
+            ),
         )
     if tier == C:
         n = rng.choice([2, 3, 4])
@@ -216,30 +228,34 @@ def gen_same_denominator(rng: random.Random, tier: StudentLevel) -> Question:
         return q(
             f"{a}/{d} + {b}/{d} = ?",
             frac(s),
-            f"Add the numerators: {a} + {b} = {a + b}, so the answer is {a + b}/{d} = {frac(s)}",
+            f"Add the numerators: {a} + {b} = {a + b}, so the answer is "
+            f"{a + b}/{d}{simplified(a + b, d)}",
             f"{a}/{d}+{b}/{d}",
             str(s),
-            diagram=NumberLine(start=0, end=1, step=1 / d, marks=[(a + b) / d]),
+            diagram=NumberLine(
+                start=0, end=1, step=1 / d, marks=[(a + b) / d], label_style="fraction"
+            ),
         )
     if tier == C:
         whole, a, b = rng.randint(1, 3), rng.randint(1, d - 1), rng.randint(1, d - 1)
-        start = Fraction(whole * d + a, d)
-        result = start - Fraction(b, d)
+        improper = whole * d + a
+        result = Fraction(improper - b, d)
         return q(
             f"{whole} {a}/{d} − {b}/{d} = ?",
             frac(result),
-            f"{whole} {a}/{d} = {start.numerator}/{d}; {start.numerator}/{d} − {b}/{d} = "
-            f"{start.numerator - b}/{d} = {frac(result)}",
-            f"{start.numerator}/{d}-{b}/{d}",
+            f"{whole} {a}/{d} = {improper}/{d}; {improper}/{d} − {b}/{d} = "
+            f"{improper - b}/{d}{simplified(improper - b, d)}",
+            f"{whole}+{a}/{d}-{b}/{d}",
             str(result),
         )
-    a, b = rng.randint(2, 3), rng.randint(2, 3)
+    a, b = rng.randint(1, (d - 1) // 2), rng.randint(1, (d - 1) // 2)
     left = Fraction(d - a - b, d)
     return q(
         f"A pizza is cut into {d} equal slices. Leo eats {a}/{d} and Ava eats {b}/{d}. "
         "What fraction of the pizza is left?",
         frac(left),
-        f"Eaten: {a + b}/{d}. Left: {d}/{d} − {a + b}/{d} = {frac(left)}",
+        f"Eaten: {a + b}/{d}. Left: {d}/{d} − {a + b}/{d} = {d - a - b}/{d}"
+        f"{simplified(d - a - b, d)}",
         f"1-{a}/{d}-{b}/{d}",
         str(left),
     )

@@ -20,11 +20,13 @@ def _to_png(fig) -> bytes:
     return buffer.getvalue()
 
 
-def _tick_label(value: float, step: float) -> str:
+def _tick_label(value: float, step: float, style: str) -> str:
     if abs(value - round(value)) < 1e-9:
         return str(round(value))
     denominator = round(1 / step)
-    if denominator > 1 and abs(1 / step - denominator) < 1e-6 and (step * 100) % 1 > 1e-9:
+    is_unit_fraction = denominator > 1 and abs(1 / step - denominator) < 1e-6
+    awkward_decimal = (step * 100) % 1 > 1e-9
+    if is_unit_fraction and style != "decimal" and (style == "fraction" or awkward_decimal):
         return f"{round(value * denominator)}/{denominator}"
     return f"{value:.3f}".rstrip("0")
 
@@ -42,7 +44,9 @@ def render_number_line(diagram: NumberLine) -> bytes:
     for i in range(count):
         x = start + i * step
         ax.plot([x, x], [-0.08, 0.08], color="black", linewidth=1)
-        ax.text(x, -0.25, _tick_label(x, step), ha="center", va="top", fontsize=8)
+        ax.text(
+            x, -0.25, _tick_label(x, step, diagram.label_style), ha="center", va="top", fontsize=8
+        )
     for i, mark in enumerate(diagram.marks):
         ax.plot(mark, 0, "o", color="#DC2626", markersize=7)
         if i < len(diagram.labels):
