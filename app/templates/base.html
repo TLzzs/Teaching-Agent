@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Teaching Agent{% endblock %}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+  <style>
+    .prose-lite h3 { font-weight: 600; font-size: 1.05rem; margin: 1rem 0 .4rem; }
+    .prose-lite h4, .prose-lite h5 { font-weight: 600; margin: .8rem 0 .3rem; }
+    .prose-lite p { margin: .4rem 0; line-height: 1.6; }
+    .prose-lite ul { list-style: disc; padding-left: 1.4rem; margin: .4rem 0; }
+    .prose-lite ol { list-style: decimal; padding-left: 1.4rem; margin: .4rem 0; }
+    .htmx-indicator { display: none; }
+    .htmx-request .htmx-indicator, .htmx-request.htmx-indicator { display: inline-flex; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen">
+  <header class="bg-white border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-lg bg-teal-700 text-white grid place-items-center font-bold">TA</div>
+        <div>
+          <div class="font-semibold">Teaching Agent</div>
+          <div class="text-xs text-slate-500">维州补习机构备课助手 · Victorian Curriculum 2.0</div>
+        </div>
+      </div>
+      {% block header_right %}{% endblock %}
+    </div>
+  </header>
+  <main class="max-w-6xl mx-auto px-6 py-8">
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

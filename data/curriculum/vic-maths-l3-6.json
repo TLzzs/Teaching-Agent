@@ -1,0 +1,120 @@
+{
+  "framework": "Victorian Curriculum 2.0",
+  "subject": "Mathematics",
+  "source_url": "https://f10.vcaa.vic.edu.au/learning-areas/mathematics",
+  "notice": "Demo subset. Summaries and teaching points are paraphrased for this product and are not VCAA text. Check every content description code against the VCAA site before using this data with customers.",
+  "items": [
+    {
+      "code": "VC2M3N03",
+      "level": 3,
+      "strand": "Number",
+      "topic": "Adding and subtracting with regrouping",
+      "summary": "Add and subtract two- and three-digit numbers using place value, partitioning and regrouping, and check answers with estimation.",
+      "teaching_points": ["Partition numbers into hundreds, tens and ones", "Show regrouping on a place value chart", "Estimate first, then check the exact answer"]
+    },
+    {
+      "code": "VC2M3N05",
+      "level": 3,
+      "strand": "Number",
+      "topic": "Multiplication facts for 2, 3, 4, 5 and 10",
+      "summary": "Recall and use multiplication facts for 2, 3, 4, 5 and 10 and the related division facts.",
+      "teaching_points": ["Use arrays and skip counting", "Connect multiplication and division as inverse operations", "Use doubling to move from 2s to 4s"]
+    },
+    {
+      "code": "VC2M3M03",
+      "level": 3,
+      "strand": "Measurement",
+      "topic": "Measuring length in centimetres and metres",
+      "summary": "Measure and compare lengths using metres and centimetres and convert between them in simple cases.",
+      "teaching_points": ["1 metre is 100 centimetres", "Line up the zero mark on a ruler", "Choose a sensible unit for the object"]
+    },
+    {
+      "code": "VC2M4N04",
+      "level": 4,
+      "strand": "Number",
+      "topic": "Equivalent fractions",
+      "summary": "Find and represent equivalent fractions with denominators of 2, 3, 4, 5, 6, 8, 10 and 12 using models and number lines.",
+      "teaching_points": ["Multiply numerator and denominator by the same number", "Show equivalence on parallel number lines", "Compare fractions by converting to a common denominator"]
+    },
+    {
+      "code": "VC2M4N07",
+      "level": 4,
+      "strand": "Number",
+      "topic": "Multiplying two-digit by one-digit numbers",
+      "summary": "Multiply two- and three-digit numbers by one-digit numbers using place value and the distributive property.",
+      "teaching_points": ["Split the larger number into tens and ones", "Use an area model", "Estimate to check reasonableness"]
+    },
+    {
+      "code": "VC2M4M02",
+      "level": 4,
+      "strand": "Measurement",
+      "topic": "Perimeter and area of rectangles",
+      "summary": "Find the perimeter of rectangles and estimate and compare areas by counting square units.",
+      "teaching_points": ["Perimeter is the distance around the shape", "Area counts unit squares inside the shape", "Opposite sides of a rectangle are equal"]
+    },
+    {
+      "code": "VC2M5N05",
+      "level": 5,
+      "strand": "Number",
+      "topic": "Adding and subtracting fractions with the same denominator",
+      "summary": "Add and subtract fractions with the same denominator, including mixed numbers, using models and number lines.",
+      "teaching_points": ["Only the numerators change when denominators match", "Convert improper fractions to mixed numbers", "Model the operation on a number line"]
+    },
+    {
+      "code": "VC2M5N06",
+      "level": 5,
+      "strand": "Number",
+      "topic": "Decimals to thousandths",
+      "summary": "Read, write, order and round decimals to thousandths and connect them to fractions with denominators of 10, 100 and 1000.",
+      "teaching_points": ["Extend the place value chart to thousandths", "Compare decimals digit by digit from the left", "Rounding to the nearest tenth or hundredth"]
+    },
+    {
+      "code": "VC2M5M02",
+      "level": 5,
+      "strand": "Measurement",
+      "topic": "Area of rectangles using formulas",
+      "summary": "Calculate the area and perimeter of rectangles using formulas and solve practical problems with them.",
+      "teaching_points": ["Area = length x width", "Perimeter = 2 x (length + width)", "Always include square units for area"]
+    },
+    {
+      "code": "VC2M5ST01",
+      "level": 5,
+      "strand": "Statistics",
+      "topic": "Interpreting column graphs",
+      "summary": "Construct and interpret column graphs from collected data and describe what the data shows.",
+      "teaching_points": ["Read values carefully from the scale", "Compare categories using differences", "Find the total and the most common category"]
+    },
+    {
+      "code": "VC2M6N04",
+      "level": 6,
+      "strand": "Number",
+      "topic": "Adding and subtracting fractions with related denominators",
+      "summary": "Add and subtract fractions where one denominator is a multiple of the other, and solve problems involving these fractions.",
+      "teaching_points": ["Rename one fraction so the denominators match", "Simplify the answer", "Check with a fraction wall or number line"]
+    },
+    {
+      "code": "VC2M6N07",
+      "level": 6,
+      "strand": "Number",
+      "topic": "Percentages of quantities",
+      "summary": "Find simple percentages of quantities, such as 10%, 25% and 50%, and connect percentages to fractions and decimals.",
+      "teaching_points": ["Percent means out of 100", "10% is one tenth, 25% is one quarter", "Build harder percentages from 10% and 5%"]
+    },
+    {
+      "code": "VC2M6N01",
+      "level": 6,
+      "strand": "Number",
+      "topic": "Integers on the number line",
+      "summary": "Locate and order positive and negative integers on a number line and use them in everyday contexts such as temperature.",
+      "teaching_points": ["Numbers left of zero are negative", "Further left means smaller", "Use temperature and sea level as contexts"]
+    },
+    {
+      "code": "VC2M6ST01",
+      "level": 6,
+      "strand": "Statistics",
+      "topic": "Mean of a data set",
+      "summary": "Calculate the mean of a small data set and compare data sets using the mean and the range.",
+      "teaching_points": ["Mean = total divided by number of values", "Range = largest minus smallest", "Check the mean sits between the smallest and largest values"]
+    }
+  ]
+}

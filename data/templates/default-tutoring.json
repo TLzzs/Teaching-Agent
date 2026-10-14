@@ -1,0 +1,61 @@
+{
+  "id": "default-tutoring",
+  "name": "Standard tutoring lesson",
+  "description": "Review, teach, worked examples, tiered practice, quick quiz, homework and a note for parents.",
+  "sections": [
+    {
+      "id": "warm_up",
+      "title": "Warm-up Review",
+      "output_type": "markdown",
+      "dependencies": [],
+      "description": "Plan a 5-8 minute warm-up for ${STUDENT_LEVEL} students that revisits the prerequisite skills for this topic. Give the teacher 3-4 quick oral or whiteboard questions with answers, and one sentence on how to spot students who are not ready."
+    },
+    {
+      "id": "teach",
+      "title": "Teaching the New Idea",
+      "output_type": "markdown",
+      "dependencies": ["warm_up"],
+      "description": "Write the teacher's explanation of the new idea for a ${DURATION}-minute lesson. Include: the learning intention and success criteria in student-friendly language, the key vocabulary, a step-by-step explanation with one concrete model (concrete materials, a diagram or a number line), two common misconceptions and how to address them, and timing for each part."
+    },
+    {
+      "id": "worked_examples",
+      "title": "Worked Examples",
+      "output_type": "questions",
+      "dependencies": ["teach"],
+      "student_facing": true,
+      "answers_in_student_copy": true,
+      "description": "Write 3 worked examples that increase in difficulty. Each must have a full step-by-step working that a teacher can model on the board. Every numeric answer must include a check expression."
+    },
+    {
+      "id": "practice",
+      "title": "Tiered Practice",
+      "output_type": "questions",
+      "dependencies": ["worked_examples"],
+      "student_facing": true,
+      "description": "Write 9 practice questions: 3 with tier \"foundation\", 3 with tier \"core\" and 3 with tier \"extension\". Foundation questions mirror the worked examples, core questions vary the numbers or context, extension questions require reasoning or a two-step problem. Use Australian contexts (AUD, metric units, local places). Include at least one diagram where it helps."
+    },
+    {
+      "id": "quiz",
+      "title": "5-Minute Exit Quiz",
+      "output_type": "questions",
+      "dependencies": ["teach"],
+      "student_facing": true,
+      "description": "Write 4 short quiz questions that a student can finish in 5 minutes and that test only the learning intention of this lesson. Avoid questions that copy the worked examples."
+    },
+    {
+      "id": "homework",
+      "title": "Homework",
+      "output_type": "questions",
+      "dependencies": ["practice"],
+      "student_facing": true,
+      "description": "Write 6 homework questions for ${STUDENT_LEVEL} students: 4 consolidation questions and 2 word problems in Australian everyday contexts. They should take about 20 minutes."
+    },
+    {
+      "id": "parent_note",
+      "title": "Note for Parents",
+      "output_type": "markdown",
+      "dependencies": ["teach", "practice"],
+      "description": "Write a short, warm note for parents in ${PARENT_LANGUAGE} (about 120 words). Explain what the class learned today, why it matters for the student's progress in Victorian Curriculum Mathematics Level ${LEVEL}, and one simple activity parents can do at home. Do not mention any individual student."
+    }
+  ]
+}

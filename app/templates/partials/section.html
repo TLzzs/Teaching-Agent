@@ -1,0 +1,53 @@
+<article id="section-{{ section.section_id }}" class="bg-white rounded-xl border border-slate-200 p-5">
+  <div class="flex items-center justify-between gap-3 mb-3">
+    <h3 class="font-semibold text-lg" style="color: {{ org.primary_color }}">{{ section.title }}</h3>
+    {% if section.revision_feedback %}
+    <span class="text-xs px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700">已按反馈修改 {{ section.revision_feedback | length }} 次</span>
+    {% endif %}
+  </div>
+
+  {% if section.output_type == "markdown" %}
+    <div class="prose-lite text-[15px]">{{ section.markdown | markdown }}</div>
+  {% else %}
+    <ol class="space-y-4">
+      {% for q in section.questions %}
+      <li class="border border-slate-100 rounded-lg p-3">
+        <div class="flex items-start gap-2">
+          <span class="font-semibold text-slate-500">{{ loop.index }}.</span>
+          <div class="flex-1">
+            {% if q.tier %}
+            <span class="text-[11px] uppercase tracking-wide px-1.5 py-0.5 rounded
+              {{ {'foundation': 'bg-sky-50 text-sky-700', 'core': 'bg-violet-50 text-violet-700', 'extension': 'bg-orange-50 text-orange-700'}[q.tier.value] }}">{{ q.tier.value }}</span>
+            {% endif %}
+            <p class="mt-1">{{ q.prompt }}</p>
+            {% if q.diagram %}<img src="{{ q.diagram | diagram_uri }}" alt="diagram" class="mt-2 max-h-56">{% endif %}
+            <details class="mt-2 text-sm">
+              <summary class="cursor-pointer text-slate-500">答案与解析：<span class="font-medium text-slate-800">{{ q.answer }}</span></summary>
+              {% if q.working %}<p class="mt-1 text-slate-600">{{ q.working }}</p>{% endif %}
+            </details>
+            {% if q.check_result %}
+              {% set status = q.check_result.status %}
+              <p class="mt-1 text-xs {{ 'text-emerald-700' if status == CheckStatus.VERIFIED else 'text-red-600' }}">
+                {% if status == CheckStatus.VERIFIED %}✓ 答案已用代码复算（{{ q.check_result.computed }}）
+                {% elif status == CheckStatus.NOT_CHECKABLE %}需要老师人工核对（非数值答案）
+                {% else %}⚠ 自动校验未通过：{{ q.check_result.message }}{% endif %}
+              </p>
+            {% endif %}
+          </div>
+        </div>
+      </li>
+      {% endfor %}
+    </ol>
+  {% endif %}
+
+  {% if error %}
+  <p class="mt-4 text-sm rounded-lg bg-red-50 text-red-700 px-3 py-2">重写失败，已保留原内容：{{ error }}</p>
+  {% endif %}
+  <form hx-post="/plans/{{ plan.id }}/sections/{{ section.section_id }}/regenerate"
+        hx-target="#section-{{ section.section_id }}" hx-swap="outerHTML" hx-disabled-elt="find button"
+        class="mt-4 flex gap-2">
+    <input name="feedback" required maxlength="1000" placeholder="对这一段不满意？写一句修改意见，例如：换一个更贴近生活的例子"
+           class="flex-1 rounded-lg border border-slate-300 px-3 py-1.5 text-sm">
+    <button class="rounded-lg bg-slate-800 hover:bg-slate-900 text-white text-sm px-3 py-1.5 disabled:opacity-60">按意见重写</button>
+  </form>
+</article>

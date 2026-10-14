@@ -1,0 +1,28 @@
+<div class="space-y-5">
+  <div class="bg-white rounded-xl border border-slate-200 p-5">
+    <div class="flex flex-wrap items-start justify-between gap-4">
+      <div>
+        <div class="text-xs uppercase tracking-wide text-slate-500">{{ item.code }} · Level {{ item.level }} · {{ item.strand }}</div>
+        <h2 class="text-xl font-semibold mt-1" style="color: {{ org.primary_color }}">{{ item.topic }}</h2>
+        <p class="text-sm text-slate-600 mt-1">{{ STUDENT_LEVEL_LABELS[plan.request.student_level] }} · {{ plan.request.duration_minutes }} 分钟 · {{ org.name }}</p>
+      </div>
+      <div class="flex gap-2">
+        <a href="/export/{{ plan.id }}.docx?variant=teacher" class="rounded-lg bg-teal-700 hover:bg-teal-800 text-white text-sm px-4 py-2">下载教师版 Word</a>
+        <a href="/export/{{ plan.id }}.docx?variant=student" class="rounded-lg border border-teal-700 text-teal-800 hover:bg-teal-50 text-sm px-4 py-2">下载学生练习卷</a>
+      </div>
+    </div>
+    {% set all_q = plan.sections | selectattr("questions") | map(attribute="questions") | sum(start=[]) %}
+    {% set verified = all_q | selectattr("check_result.status", "equalto", CheckStatus.VERIFIED) | list | length %}
+    <div class="mt-4 text-sm flex flex-wrap gap-3">
+      <span class="px-2 py-1 rounded bg-emerald-50 text-emerald-800">{{ verified }} / {{ all_q | length }} 道题答案已自动复算</span>
+      {% if verified < all_q | length %}
+      <span class="px-2 py-1 rounded bg-red-50 text-red-700">{{ all_q | length - verified }} 道题需要老师核对</span>
+      {% endif %}
+      <span class="px-2 py-1 rounded bg-slate-100 text-slate-600">AI 生成内容，使用前请老师审核</span>
+    </div>
+  </div>
+
+  {% for section in plan.sections %}
+    {% include "partials/section.html" %}
+  {% endfor %}
+</div>

@@ -1,0 +1,11 @@
+{
+  "id": "demo-org",
+  "name": "Box Hill Bright Minds Tutoring",
+  "tagline": "Primary Maths & English | Box Hill VIC",
+  "primary_color": "#0F766E",
+  "logo_path": null,
+  "footer_text": "Box Hill Bright Minds Tutoring - for enrolled students only",
+  "template_id": "default-tutoring",
+  "output_language": "English",
+  "parent_language": "Simplified Chinese"
+}
