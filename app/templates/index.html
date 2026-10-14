@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="grid lg:grid-cols-[340px_1fr] gap-8 items-start">
+<div class="grid lg:grid-cols-[380px_1fr] gap-8 items-start">
   <form hx-post="/generate" hx-target="#result" hx-indicator="#spinner" hx-disabled-elt="find button"
         class="bg-white rounded-xl border border-slate-200 p-5 space-y-4 lg:sticky lg:top-6">
     <h2 class="font-semibold text-lg">生成一节课</h2>
@@ -44,7 +44,7 @@
       <label class="block">
         <span class="text-sm text-slate-600">课时（分钟）</span>
         <input type="number" name="duration_minutes" value="60" min="30" max="180" step="15"
-               class="mt-1 w-full rounded-lg border-slate-300 border px-3 py-2">
+               class="mt-1 w-full rounded-lg border-slate-300 border px-3 py-2 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
       </label>
     </div>
 
@@ -65,7 +65,7 @@
   </form>
 
   <section id="result">
-    <div class="rounded-xl border-2 border-dashed border-slate-200 p-12 text-center text-slate-400">
+    <div class="rounded-xl border-2 border-dashed border-slate-200 p-10 text-slate-400 text-sm leading-relaxed">
       选好知识点后点击“生成”，这里会显示整节课的教案、分层练习、小测、作业和家长反馈。
     </div>
   </section>
