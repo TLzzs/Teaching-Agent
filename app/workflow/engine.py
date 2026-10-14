@@ -82,9 +82,7 @@ class LessonGenerator:
             return result
 
         results = await run_dag(ctx.template.sections, generate_section, completed)
-        return plan.model_copy(
-            update={"sections": [results[s.id] for s in ctx.template.sections]}
-        )
+        return plan.model_copy(update={"sections": [results[s.id] for s in ctx.template.sections]})
 
     async def _generate_section(
         self,
@@ -123,8 +121,9 @@ class LessonGenerator:
         prompt = request.prompt
         last_error = ""
         for _ in range(self.max_attempts):
-            request.prompt = prompt + (f"\n\nYour previous reply was invalid: {last_error}"
-                                       if last_error else "")
+            request.prompt = prompt + (
+                f"\n\nYour previous reply was invalid: {last_error}" if last_error else ""
+            )
             raw = await self.provider.complete(request)
             try:
                 question_set = QuestionSet.model_validate_json(strip_fences(raw))

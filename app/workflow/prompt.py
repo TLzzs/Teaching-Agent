@@ -126,7 +126,9 @@ def build_section_prompt(
 
     # 5. Sections this one depends on
     if dependencies:
-        rendered = "\n\n".join(f"--- {d.title} ---\n{d.as_context()}" for d in dependencies.values())
+        rendered = "\n\n".join(
+            f"--- {d.title} ---\n{d.as_context()}" for d in dependencies.values()
+        )
         parts.append(f"=== PREVIOUSLY WRITTEN SECTIONS ===\n{rendered}")
 
     if revision is not None:
